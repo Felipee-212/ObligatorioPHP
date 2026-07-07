@@ -102,7 +102,7 @@ class Equipo {
 
         if ($resultado && mysqli_num_rows($resultado) > 0) {
             $fila = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
-            $this->hidratar($fila);
+            $this->llenarDesdeFila($fila);
             $conexion->cerrarConexion();
             return true;
         }
@@ -112,8 +112,8 @@ class Equipo {
     }
 
 
-    // hidratar: llena los atributos del objeto desde una fila de la base
-    private function hidratar($fila) {
+    // llena los atributos del objeto desde una fila de la base
+    private function llenarDesdeFila($fila) {
         $this->idEquipo         = $fila['id_equipo'];
         $this->codigoInventario = $fila['codigo_inventario'];
         $this->marca            = $fila['marca'];
@@ -188,7 +188,7 @@ class Equipo {
         $lista = [];
         while ($fila = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
             $e = new Equipo();
-            $e->hidratar($fila);
+            $e->llenarDesdeFila($fila);
             $lista[] = $e;
         }
         return $lista;

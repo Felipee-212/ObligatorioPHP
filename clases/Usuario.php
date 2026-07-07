@@ -147,7 +147,7 @@ class Usuario {
 
         if ($resultado && mysqli_num_rows($resultado) > 0) {
             $fila = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
-            $this->hidratar($fila);
+            $this->llenarDesdeFila($fila);
             $conexion->cerrarConexion();
             return true;
         }
@@ -157,8 +157,8 @@ class Usuario {
     }
 
 
-    // hidratar: llena los atributos del objeto desde una fila de la base
-    private function hidratar($fila) {
+    // llena los atributos del objeto desde una fila de la base
+    private function llenarDesdeFila($fila) {
         $this->idUsuario       = $fila['id_usuario'];
         $this->ci              = $fila['ci'];
         $this->primerNombre    = $fila['primer_nombre'];
@@ -204,7 +204,7 @@ class Usuario {
         if ($resultado && mysqli_num_rows($resultado) > 0) {
             $fila = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
             $u = new Usuario();
-            $u->hidratar($fila);
+            $u->llenarDesdeFila($fila);
             $conexion->cerrarConexion();
             return $u;
         }
@@ -234,7 +234,7 @@ class Usuario {
         $lista = [];
         while ($fila = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
             $u = new Usuario();
-            $u->hidratar($fila);
+            $u->llenarDesdeFila($fila);
             $lista[] = $u;
         }
 
